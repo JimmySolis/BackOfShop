@@ -35,7 +35,7 @@ Product.init(
         type: DataTypes.INTEGER,
         references: {
           model: 'category',
-          key: 'c_id',
+          key: 'category_id',
         },
       }
 
