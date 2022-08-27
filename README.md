@@ -27,6 +27,13 @@
   Follow these instructions to contact me: <br />
   Please email me if you have any questions.
 
+  ## Links
+  Github repo:
+  https://github.com/JimmySolis/BackOfShop
+
+  Video link: 
+  https://drive.google.com/file/d/1Z2m7rBbEFWyvxE-YDtwUo_A7CjKm5vwS/view?usp=sharing
+
   # How it work:
 
   ## 1: We make sure we have a connection that is suppling our sensitive credentials through a .env file
