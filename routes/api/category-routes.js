@@ -9,9 +9,12 @@ router.get('/', async (req, res) =>{
 
 
 router.get('/:id', async (req, res) => { 
-  res.json(await Category.findByPk(req.params.id,{
-    include:[{ model: Product}]
-  }))
+  try {
+     res.json(await Category.findByPk(req.params.id, { include:[{ model: Product }] }))
+  } catch (error) {
+    res.status(500).json({ message : `We can't find Category ${req.params.id}`})
+  }
+ 
 });
 
 router.post('/', async (req, res) => {
