@@ -19,7 +19,9 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    res.json(await Tag.create(req.body))
+    res.json(await Tag.create({
+      tag_name : req.body.tag_name
+    }))
   } catch (error) {
     res.status(500).json({message: `We couldn't make your tag!`})
   }

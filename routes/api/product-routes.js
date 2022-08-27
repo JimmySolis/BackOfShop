@@ -80,7 +80,7 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
   res.json(await Product.destroy({ 
-    where: { p_id : req.params.id }
+    where: { product_id : req.params.id }
     }))
   } catch (error) {
     res.status(500).json({message:`We can't delete ${req.params.id}`})
