@@ -1,28 +1,56 @@
 const router = require('express').Router();
+const { response } = require('express');
 const { Tag, Product, ProductTag } = require('../../models');
 
-// The `/api/tags` endpoint
-
-router.get('/', (req, res) => {
-  // find all tags
-  // be sure to include its associated Product data
+router.get('/', async (req, res) => { res.json( await Tag.findAll({
+  attributes: ['tag_id', 'tag_name'],
+  include:[{ model: Product}]}))
 });
 
-router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+router.get('/:id', async (req, res) => {
+  try {
+    res.json( await Tag.findByPk(req.params.id,{
+    attributes: ['tag_id', 'tag_name'],
+    include:[{ model: Product}]}))
+  } catch (error) {
+    res.status(500).json({message: `We can't find Tag ${req.params.id}`})
+  }
 });
 
-router.post('/', (req, res) => {
-  // create a new tag
+router.post('/', async (req, res) => {
+  try {
+    res.json(await Tag.create(req.body))
+  } catch (error) {
+    res.status(500).json({message: `We couldn't make your tag!`})
+  }
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+router.put('/:id', async(req, res) => {
+  try {
+    res.json( await Tag.update({
+      tag_name: req.body.tag_name
+    },
+    {
+      where:{
+        tag_id: req.params.id
+      }
+    }))
+  } catch (error) {
+    res.status(500).json({message:`We could not update your Tage!`})
+  }
 });
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
+  try {
+    res.json(Tag.destroy({
+      where: {
+        tag_id: req.params.id
+      }
+    }))
+  } catch (error) {
+    res.status(500).json({message:`We could not update your Tage!`})
+  }
 });
 
 module.exports = router;
